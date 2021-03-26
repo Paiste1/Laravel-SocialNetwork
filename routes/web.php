@@ -27,3 +27,7 @@ Route::post('/signin', 'AuthController@postSignIn')->middleware('guest');
 
 // выход
 Route::get('/signout', 'AuthController@getSignOut')->name('auth.signout');
+
+
+// search
+Route::get('/search', 'SearchController@getSearch')->name('search.results');
