@@ -18,12 +18,12 @@ Route::get('/', 'HomeController@index')->name('home');
 });*/
 
 // регистрация
-Route::get('/signup', 'AuthController@getSignUp')->name('auth.signup');
-Route::post('/signup', 'AuthController@postSignUp');
+Route::get('/signup', 'AuthController@getSignUp')->middleware('guest')->name('auth.signup');
+Route::post('/signup', 'AuthController@postSignUp')->middleware('guest');
 
 // авторизация
-Route::get('/signin', 'AuthController@getSignIn')->name('auth.signin');
-Route::post('/signin', 'AuthController@postSignIn');
+Route::get('/signin', 'AuthController@getSignIn')->middleware('guest')->name('auth.signin');
+Route::post('/signin', 'AuthController@postSignIn')->middleware('guest');
 
 // выход
 Route::get('/signout', 'AuthController@getSignOut')->name('auth.signout');
