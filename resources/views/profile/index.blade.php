@@ -7,6 +7,23 @@
         </div>
 
         <div class="col-lg-4 col-lg-offset-3">
+
+            @if(Auth::user()->hasFriendRequestPending($user))
+                <p>
+                    В ожидании {{ $user->getFirstNameOrUsername() }}
+                    подтвержения запроса в друзья.
+                </p>
+            @elseif(Auth::user()->hasFriendRequestReceived($user))
+                <p>
+                    <a href="#" class="btn btn-primary mb-2">Подтвердить</a>
+                </p>
+            @elseif(Auth::user()->isFriendWith($user))
+                {{ $user->getFirstNameOrUsername() }} у Вас в друзьях.
+            @else
+                <a href="{{ route('friend.add', ['username' => $user->username]) }}"
+                   class="btn btn-primary mb-2">Добавить в друзья</a>
+            @endif
+
             <h4>Друзья ({{ $user->friends()->count() ?: 0 }})</h4>
 
             @if(!$user->friends()->count())

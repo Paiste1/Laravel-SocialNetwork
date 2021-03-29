@@ -14,13 +14,12 @@
 <body>
     @include('templates.part.navbar')
 
-    <div class="container content">
+    <div class="container content" style="min-height: calc(100vh - 170px)">
 
         @include('templates.part.alerts')
 
         @yield('content')
 
-        <hr class="row">
     </div>
 
     <footer class="container my-3 d-flex justify-content-between">
