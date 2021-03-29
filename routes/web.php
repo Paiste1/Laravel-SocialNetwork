@@ -31,3 +31,10 @@ Route::get('/signout', 'AuthController@getSignOut')->name('auth.signout');
 
 // search
 Route::get('/search', 'SearchController@getSearch')->name('search.results');
+
+// Profile
+Route::get('/user/{username}', 'ProfileController@getProfile')->name('profile.index');
+
+Route::get('/profile/edit', 'ProfileController@getEdit')->middleware('auth')->name('profile.edit');
+
+Route::post('/profile/edit', 'ProfileController@postEdit')->middleware('auth')->name('profile.edit');
