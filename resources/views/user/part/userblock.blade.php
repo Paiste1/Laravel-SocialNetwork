@@ -1,6 +1,6 @@
-<div class="media">
+<div class="media mb-2">
     <a href="#">
-        <img src="/" class="mr-3" alt="{{ $user->getNameOrUsername() }}">
+        <img src="{{ $user->getAvatarUrl() }}" class="mr-3" alt="{{ $user->getNameOrUsername() }}">
     </a>
     <div class="media-body">
         <h5 class="mt-0">
