@@ -15,11 +15,12 @@
                 </p>
             @elseif(Auth::user()->hasFriendRequestReceived($user))
                 <p>
-                    <a href="#" class="btn btn-primary mb-2">Подтвердить</a>
+                    <a href="{{ route('friend.accept', ['username' => $user->username]) }}"
+                       class="btn btn-primary mb-2">Подтвердить</a>
                 </p>
             @elseif(Auth::user()->isFriendWith($user))
                 {{ $user->getFirstNameOrUsername() }} у Вас в друзьях.
-            @else
+            @elseif ( Auth::user()->id !== $user->id )
                 <a href="{{ route('friend.add', ['username' => $user->username]) }}"
                    class="btn btn-primary mb-2">Добавить в друзья</a>
             @endif

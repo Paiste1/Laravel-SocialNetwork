@@ -39,3 +39,4 @@ Route::post('/profile/edit', 'ProfileController@postEdit')->middleware('auth')->
 // friends
 Route::get('/friends', 'FriendController@getIndex')->middleware('auth')->name('friend.index');
 Route::get('friends/add/{username}', 'FriendController@getAdd')->middleware('auth')->name('friend.add');
+Route::get('friends/accept/{username}', 'FriendController@getAccept')->middleware('auth')->name('friend.accept');
