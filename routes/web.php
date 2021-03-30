@@ -40,3 +40,6 @@ Route::post('/profile/edit', 'ProfileController@postEdit')->middleware('auth')->
 Route::get('/friends', 'FriendController@getIndex')->middleware('auth')->name('friend.index');
 Route::get('friends/add/{username}', 'FriendController@getAdd')->middleware('auth')->name('friend.add');
 Route::get('friends/accept/{username}', 'FriendController@getAccept')->middleware('auth')->name('friend.accept');
+
+// стена
+Route::post('/status', 'StatusController@postStatus')->middleware('auth')->name('status.post');

@@ -4,9 +4,16 @@
 
     <div class="row">
         <div class="col-lg-6">
-            <form action="#" method="POST">
+            <form action="{{ route('status.post') }}" method="POST">
+                @csrf
                 <div class="form-group">
-                    <textarea class="form-control" placeholder="Чего нового?" rows="3"></textarea>
+                    <textarea name="status" class="form-control {{ $errors->has('status') ? ' is-invalid' : '' }}"
+                              placeholder="Чего нового {{ Auth::user()->getFirstNameOrUsername() }} ?" rows="3"></textarea>
+                    @if ($errors->has('status'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('status') }}
+                        </div>
+                    @endif
                 </div>
                 <button type="submit" class="btn btn-primary">Опубликовать</button>
             </form>

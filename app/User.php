@@ -68,6 +68,12 @@ class User extends Authenticatable
         return $this->first_name ?: $this->username;
     }
 
+    // пользователю принадлежит статус
+    public function statuses ()
+    {
+        return $this->hasmany('App\Status', 'user_id');
+    }
+
     # получить аватарку из граватар
     public function getAvatarUrl()
     {
