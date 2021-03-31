@@ -4,6 +4,53 @@
 
     <div class="row">
         <div class="col-lg-6">
+
+        @if (!$statuses->count())
+            Нет записей...
+        @else
+            @foreach($statuses as $status)
+                <div class="media">
+                    <a class="mr-3" href="{{ route('profile.index', ['username' => $status->user->username]) }}">
+                        <img class="media-object rounded" src="{{ $status->user->getAvatarUrl() }}"
+                             alt="{{ $status->user->getNameOrUsername() }}">
+                    </a>
+                    <div class="media-body">
+                        <h4>
+                            <a href="{{ route('profile.index', ['username' => $status->user->username]) }}">
+                                {{ $status->user->getNameOrUsername() }}</a>
+                        </h4>
+                        <p>{{ $status->body }}</p>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">{{ $status->created_at->diffForHumans() }}</li>
+                            <li class="list-inline-item">
+                                <a href="#">Лайк</a>
+                            </li>
+                            <li class="list-inline-item">10 Лайков</li>
+                        </ul>
+
+                        <form method="POST" action="#" class="mb-4">
+                            @csrf
+                            <div class="form-group">
+                                <textarea name="status" class="form-control"
+                                    placeholder="Прокомментировать" rows="2"></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-primary btn-sm" value="Ответить">
+                        </form>
+
+                    </div>
+                </div>
+            @endforeach
+
+            {{ $statuses->links() }}
+        @endif
+
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-lg-6">
             <form action="{{ route('status.post') }}" method="POST">
                 @csrf
                 <div class="form-group">
@@ -17,12 +64,6 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Опубликовать</button>
             </form>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-5">
-
         </div>
     </div>
 
