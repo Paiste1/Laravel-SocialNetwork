@@ -68,4 +68,19 @@ class FriendController extends Controller
             ->route('profile.index', ['username' => $username])
             ->with('info', 'Запрос в друзья принят.');
     }
+
+    public function postDelete($username)
+    {
+        $user = User::where('username', $username)->first();
+
+        if (!Auth::user()->isFriendWith($user)) {
+            return redirect()->back();
+        }
+
+        Auth::user()->deleteFriend($user);
+
+        return redirect()
+            ->back()
+            ->with('info', 'Удален из друзей');
+    }
 }

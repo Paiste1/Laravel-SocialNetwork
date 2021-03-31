@@ -20,6 +20,11 @@
                 </p>
             @elseif(Auth::user()->isFriendWith($user))
                 {{ $user->getFirstNameOrUsername() }} у Вас в друзьях.
+
+                <form action="{{ route('friend.delete', ['username' => $user->username]) }}" method="POST">
+                    @csrf
+                    <input type="submit" class="btn btn-primary my-2" value="Удалить из друзей">
+                </form>
             @elseif ( Auth::user()->id !== $user->id )
                 <a href="{{ route('friend.add', ['username' => $user->username]) }}"
                    class="btn btn-primary mb-2">Добавить в друзья</a>
