@@ -28,11 +28,20 @@
                             <li class="list-inline-item">10 Лайков</li>
                         </ul>
 
-                        <form method="POST" action="#" class="mb-4">
+                        <form method="POST" action="{{ route('status.reply', ['statusId' => $status->id]) }}" class="mb-4">
                             @csrf
                             <div class="form-group">
-                                <textarea name="status" class="form-control"
-                                    placeholder="Прокомментировать" rows="2"></textarea>
+                                <textarea name="reply-{{ $status->id }}"
+                                          class="form-control{{ $errors->has("reply-{$status->id}") ? ' is-invalid' : '' }}"
+                                          placeholder="Прокомментировать"
+                                          rows="2"></textarea>
+
+                                @if ($errors->has("reply-{$status->id}"))
+                                    <div class="invalid-feedback">
+                                        {{ $errors->first("reply-{$status->id}") }}
+                                    </div>
+                                @endif
+
                             </div>
                             <input type="submit" class="btn btn-primary btn-sm" value="Ответить">
                         </form>

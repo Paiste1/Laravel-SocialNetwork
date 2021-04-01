@@ -11,11 +11,8 @@
 |
 */
 
+// home
 Route::get('/', 'HomeController@index')->name('home');
-
-/*Route::get('/alert', function (){
-    return redirect()->route('home')->with('info', 'Вы можете войти!');
-});*/
 
 // регистрация
 Route::get('/signup', 'AuthController@getSignUp')->middleware('guest')->name('auth.signup');
@@ -44,3 +41,4 @@ Route::post('friends/delete/{username}', 'FriendController@postDelete')->middlew
 
 // стена
 Route::post('/status', 'StatusController@postStatus')->middleware('auth')->name('status.post');
+Route::post('/status/{statusId}/reply', 'StatusController@postReply')->middleware('auth')->name('status.reply');
