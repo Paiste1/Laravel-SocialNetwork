@@ -28,6 +28,31 @@
                             <li class="list-inline-item">10 Лайков</li>
                         </ul>
 
+                        {{-- комментарии --}}
+                        @foreach($status->replies as $reply)
+                            <div class="media">
+                                <a class="mr-3" href="{{ route('profile.index', ['username' => $reply->user->username]) }}">
+                                    <img class="media-object rounded" src="{{ $reply->user->getAvatarUrl() }}"
+                                         alt="{{ $reply->user->getNameOrUsername() }}">
+                                </a>
+                                <div class="media-body">
+                                    <h4>
+                                        <a href="{{ route('profile.index', ['username' => $reply->user->username]) }}">
+                                            {{ $reply->user->getNameOrUsername() }}</a>
+                                    </h4>
+                                    <p>{{ $reply->body }}</p>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item">{{ $reply->created_at->diffForHumans() }}</li>
+                                        <li class="list-inline-item">
+                                            <a href="#">Лайк</a>
+                                        </li>
+                                        <li class="list-inline-item">10 Лайков</li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        @endforeach
+
                         <form method="POST" action="{{ route('status.reply', ['statusId' => $status->id]) }}" class="mb-4">
                             @csrf
                             <div class="form-group">
@@ -43,7 +68,7 @@
                                 @endif
 
                             </div>
-                            <input type="submit" class="btn btn-primary btn-sm" value="Ответить">
+                            <input type="submit" class="btn btn-primary btn-sm" value="Написать">
                         </form>
 
                     </div>
